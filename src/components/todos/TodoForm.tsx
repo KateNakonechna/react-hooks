@@ -1,17 +1,18 @@
 import React, { useState, FormEvent } from "react";
+import { Todo } from "./TodoContainer";
 
 interface FormProps {
-  addTodo: (text: string) => void;
+  addTodo: (value: Todo) => void;
 }
 
 export const TodoForm: React.FC<FormProps> = ({ addTodo }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<Todo>({ text: "", isCompleted: false });
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!value) return;
     addTodo(value);
-    setValue("");
+    setValue({ text: "", isCompleted: false });
   };
 
   return (
@@ -19,8 +20,9 @@ export const TodoForm: React.FC<FormProps> = ({ addTodo }) => {
       <input
         type="text"
         className="input"
-        value={value}
-        onChange={event => setValue(event.target.value)}
+        onChange={event =>
+          setValue({ text: event.target.value, isCompleted: false })
+        }
       />
     </form>
   );
