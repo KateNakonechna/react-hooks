@@ -7,16 +7,17 @@ interface FormProps {
 
 export const TodoForm: React.FC<FormProps> = ({ addTodo }) => {
   const [value, setValue] = useState<Todo>({
+    userId: 1,
     id: 1,
-    text: "",
-    isCompleted: false
+    title: "",
+    completed: false
   });
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!value) return;
     addTodo(value);
-    setValue({ id: Date.now(), text: "", isCompleted: false });
+    setValue({ userId: 1, id: 1, title: "", completed: false });
   };
 
   return (
@@ -26,9 +27,10 @@ export const TodoForm: React.FC<FormProps> = ({ addTodo }) => {
         className="input"
         onChange={event =>
           setValue({
+            userId: 1,
             id: Date.now(),
-            text: event.target.value,
-            isCompleted: false
+            title: event.target.value,
+            completed: false
           })
         }
       />

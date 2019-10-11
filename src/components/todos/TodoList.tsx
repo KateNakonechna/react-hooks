@@ -25,8 +25,8 @@ export const TodoList: React.FC<TodoListProps> = ({
     <List component="nav" aria-label="main mailbox folders">
       <ListItem button>
         <ListItemText
-          primary={todo.text}
-          style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+          primary={todo.title}
+          style={{ textDecoration: todo.completed ? "line-through" : "" }}
         />
         <Button
           variant="contained"

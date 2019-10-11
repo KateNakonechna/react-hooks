@@ -1,6 +1,7 @@
 import { Todo } from "./TodoContainer";
 
 type Actions =
+  | { type: "GET_TODOS"; payload: any }
   | { type: "ADD_TODO"; payload: Todo }
   | {
       type: "REMOVE_TODO";
@@ -16,6 +17,11 @@ type State = {
 
 export const TodoReducer = (state: State, action: Actions) => {
   switch (action.type) {
+    case "GET_TODOS":
+      return {
+        ...state,
+        todos: action.payload
+      };
     case "ADD_TODO":
       const addedTodos = [...state.todos, action.payload];
       return {
