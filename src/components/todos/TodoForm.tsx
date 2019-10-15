@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from "react";
 import { Todo } from "./TodoContainer";
+import TextField from "@material-ui/core/TextField";
 
 interface FormProps {
   addTodo: (value: Todo) => void;
@@ -22,9 +23,14 @@ export const TodoForm: React.FC<FormProps> = ({ addTodo }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <TextField
         type="text"
         className="input"
+        margin="normal"
+        variant="filled"
+        id="filled-name"
+        label="Name"
+        defaultValue="Todo"
         onChange={event =>
           setValue({
             userId: 1,
