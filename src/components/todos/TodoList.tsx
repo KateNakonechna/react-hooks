@@ -11,14 +11,14 @@ interface TodoListProps {
   key: number;
   index: number;
   todo: Todo;
-  // completeTodo: (index: number) => void;
+  completeTodo: (id: number) => void;
   removeTodo: (id: number) => void;
 }
 
 export const TodoList: React.FC<TodoListProps> = ({
   todo,
   index,
-  // completeTodo,
+  completeTodo,
   removeTodo
 }) => (
   <div className="root">
@@ -31,7 +31,7 @@ export const TodoList: React.FC<TodoListProps> = ({
         <Button
           variant="contained"
           color="primary"
-          // onClick={() => completeTodo(index)}
+          onClick={() => completeTodo(todo.id)}
         >
           Complete
         </Button>

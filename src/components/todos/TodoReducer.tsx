@@ -8,6 +8,12 @@ type Actions =
       payload: {
         id: number;
       };
+    }
+  | {
+      type: "TOGGLE_TODO";
+      payload: {
+        id: number;
+      };
     };
 
 type State = {
@@ -36,6 +42,20 @@ export const TodoReducer = (state: State, action: Actions) => {
         ...state,
         todos: filteredTodos
       };
+    case "TOGGLE_TODO":
+      const completedTodo = state.todos.map(todo => {
+        if (todo.id === action.payload.id) {
+          todo.completed = true;
+        }
+
+        return todo;
+      });
+
+      return {
+        ...state,
+        todos: completedTodo
+      };
+
     default:
       return state;
   }

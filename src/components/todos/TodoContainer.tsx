@@ -50,11 +50,9 @@ const TodoContainer: React.FC = () => {
     dispatch({ type: "ADD_TODO", payload: value });
   };
 
-  // const completeTodo = (index: number) => {
-  //   const newTodos = [...todos];
-  //   newTodos[index].isCompleted = true;
-  //   setTodos(newTodos);
-  // };
+  const completeTodo = (id: number) => {
+    dispatch({ type: "TOGGLE_TODO", payload: { id } });
+  };
 
   const removeTodo = (id: number) => {
     dispatch({ type: "REMOVE_TODO", payload: { id } });
@@ -70,6 +68,7 @@ const TodoContainer: React.FC = () => {
             index={index}
             todo={todo}
             removeTodo={removeTodo}
+            completeTodo={completeTodo}
           />
         ))}
       </div>
