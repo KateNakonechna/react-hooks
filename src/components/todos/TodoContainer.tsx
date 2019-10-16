@@ -54,7 +54,8 @@ const TodoContainer: React.FC = () => {
     dispatch({ type: "TOGGLE_TODO", payload: { id } });
   };
 
-  const removeTodo = (id: number) => {
+  const removeTodo = async (id: number) => {
+    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
     dispatch({ type: "REMOVE_TODO", payload: { id } });
   };
 

@@ -1,7 +1,7 @@
 import { Todo } from "./TodoContainer";
 
-type Actions =
-  | { type: "GET_TODOS"; payload: any }
+export type Actions =
+  | { type: "GET_TODOS"; payload: Todo[] }
   | { type: "ADD_TODO"; payload: Todo }
   | {
       type: "REMOVE_TODO";
@@ -16,7 +16,7 @@ type Actions =
       };
     };
 
-type State = {
+export type State = {
   todos: Todo[];
   currentTodo: Todo;
 };
@@ -45,7 +45,7 @@ export const TodoReducer = (state: State, action: Actions) => {
     case "TOGGLE_TODO":
       const completedTodo = state.todos.map(todo => {
         if (todo.id === action.payload.id) {
-          todo.completed = true;
+          todo.completed = !todo.completed;
         }
 
         return todo;
