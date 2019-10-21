@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { Todo } from "./TodoContainer";
+import React from "react";
 import List from "@material-ui/core/List";
-import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
+import { Todo } from "../interfaces/ITodo";
 
 interface TodoListProps {
   key: number;
-  index: number;
   todo: Todo;
   completeTodo: (id: number) => void;
   removeTodo: (id: number) => void;
@@ -17,7 +15,6 @@ interface TodoListProps {
 
 export const TodoList: React.FC<TodoListProps> = ({
   todo,
-  index,
   completeTodo,
   removeTodo
 }) => (

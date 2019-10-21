@@ -2,6 +2,19 @@ import React from "react";
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 
+const validationSchema = Yup.object().shape({
+  users: Yup.array().of(
+    Yup.object().shape({
+      name: Yup.string()
+        .min(4, "too short")
+        .required("Required"),
+      email: Yup.string()
+        .email()
+        .required("Required")
+    })
+  )
+});
+
 interface User {
   name: string;
   email: string;
@@ -27,23 +40,12 @@ const UserForm: React.FC = () => (
       onSubmit={(values: Values) => {
         console.log(values);
       }}
-      validationSchema={Yup.object().shape({
-        users: Yup.array().of(
-          Yup.object().shape({
-            name: Yup.string()
-              .min(4, "too short")
-              .required("Required"),
-            email: Yup.string()
-              .email()
-              .required("Required")
-          })
-        )
-      })}
+      validationSchema={validationSchema}
       render={({ values }) => (
         <Form>
           <FieldArray
             name="users"
-            render={({ insert, remove, push }) => (
+            render={({ remove, push }) => (
               <div>
                 {values.users.length > 0 &&
                   values.users.map((user, index) => (
@@ -80,7 +82,7 @@ const UserForm: React.FC = () => (
                           className="secondary"
                           onClick={() => remove(index)}
                         >
-                          X
+                          Delete
                         </button>
                       </div>
                     </div>
