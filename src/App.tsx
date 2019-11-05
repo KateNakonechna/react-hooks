@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import Loader from "./shared/Loader";
 import Navigation from "./shared/Navigation";
 
 const LazyHome = React.lazy(() => import("./features/home/Home"));
-const LazyUserForm = React.lazy(() => import("./features/users/UserForm"));
+const LazyUserForm = React.lazy(() =>
+  import("./features/users/components/UserForm")
+);
 const LazyTodo = React.lazy(() =>
-  import("./features/todos/components/TodoContainer")
+  import("./features/todos/components/TodoContainer/TodoContainer")
 );
 
 const App: React.FC = () => (

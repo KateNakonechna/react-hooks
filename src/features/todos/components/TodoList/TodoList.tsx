@@ -4,7 +4,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
-import { Todo } from "../interfaces/ITodo";
+import { Todo } from "../../interfaces/ITodo";
+import "./TodoList.scss";
 
 interface TodoListProps {
   key: number;
@@ -26,6 +27,7 @@ export const TodoList: React.FC<TodoListProps> = ({
           style={{ textDecoration: todo.completed ? "line-through" : "" }}
         />
         <Button
+          className="btn"
           variant="contained"
           color="primary"
           onClick={() => completeTodo(todo.id)}
@@ -33,6 +35,7 @@ export const TodoList: React.FC<TodoListProps> = ({
           Complete
         </Button>
         <Button
+          className="btn"
           variant="contained"
           color="secondary"
           onClick={() => removeTodo(todo.id)}

@@ -1,11 +1,18 @@
 import React, { useReducer, useEffect } from "react";
-import { TodoList } from "./TodoList";
-import { TodoReducer } from "../TodoReducer";
+import { TodoReducer } from "../../TodoReducer";
+import { useAPI } from "../../hooks/useApi";
+import {
+  getTodoAction,
+  addTodoAction,
+  completeTodoAction,
+  removeTodoAction
+} from "../../todoActionTypes";
+import { Todo } from "../../interfaces/ITodo";
+import TodoForm from "../TodoForm/TodoForm";
+import { TodoList } from "../TodoList/TodoList";
 import axios from "axios";
-import { TodoActionTypes } from "../todoActionTypes";
-import { Todo } from "../interfaces/ITodo";
-import TodoForm from "./TodoForm";
-import { useAPI } from "../hooks/useApi";
+import "./TodoContainer.scss";
+import { environment } from "../../../../environment";
 
 const TodoContainer: React.FC = () => {
   const initialState = {
@@ -14,29 +21,23 @@ const TodoContainer: React.FC = () => {
 
   const [state, dispatch] = useReducer(TodoReducer, initialState);
 
-  const savedTodos = useAPI("https://jsonplaceholder.typicode.com/todos");
+  const savedTodos = useAPI(`${environment.baseUrl}/todos`);
 
   useEffect(() => {
-    dispatch({
-      type: TodoActionTypes.GET_TODOS,
-      payload: savedTodos
-    });
+    dispatch(getTodoAction(savedTodos));
   }, [savedTodos]);
 
   const addTodo = (value: Todo) => {
-    dispatch({
-      type: TodoActionTypes.ADD_TODO,
-      payload: value
-    });
+    dispatch(addTodoAction(value));
   };
 
   const completeTodo = (id: number) => {
-    dispatch({ type: TodoActionTypes.TOGGLE_TODO, payload: { id } });
+    dispatch(completeTodoAction(id));
   };
 
   const removeTodo = async (id: number) => {
-    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
-    dispatch({ type: TodoActionTypes.REMOVE_TODO, payload: { id } });
+    await axios.delete(`${environment.baseUrl}/todos/${id}`);
+    dispatch(removeTodoAction(id));
   };
 
   return (

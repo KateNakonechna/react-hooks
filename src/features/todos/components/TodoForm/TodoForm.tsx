@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Field, Form, FormikActions } from "formik";
-import { Todo } from "../interfaces/ITodo";
+import { Todo } from "../../interfaces/ITodo";
+import "./TodoForm.scss";
 
 interface FormProps {
   addTodo: (value: Todo) => void;
@@ -17,18 +18,18 @@ const TodoForm: React.SFC<FormProps> = ({ addTodo }) => (
       initialValues={{
         todo: ""
       }}
-      onSubmit={(value: Values, { setSubmitting }: FormikActions<Values>) => {
+      onSubmit={(value: Values, { resetForm }: FormikActions<Values>) => {
         addTodo({
           userId: 1,
           id: Date.now(),
           title: value.todo,
           completed: false
         });
-        value.todo = "";
+        resetForm();
       }}
       render={() => (
-        <Form>
-          <label htmlFor="todo">First Name</label>
+        <Form className="form">
+          <label htmlFor="todo">Todo Title</label>
           <Field id="todo" name="todo" placeholder="Todo" />
           <button type="submit">Add</button>
         </Form>

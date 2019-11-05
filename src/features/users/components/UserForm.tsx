@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
+import "./UserForm.scss";
 
 const validationSchema = Yup.object().shape({
   users: Yup.array().of(
